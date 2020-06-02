@@ -16,9 +16,9 @@ function cargarXML(xml){
     var tabla = "";
     var noticias = docXML.getElementsByTagName("item");
     for (var i = 0; i < noticias.length; i++){
-        tabla += "<tr><td style='width: 30%;'>";
+        tabla += "<tr><td style='width: 30%;'><h5>";
         tabla += noticias[i].getElementsByTagName("title")[0].textContent;
-        tabla += "</td>";
+        tabla += "</h5></td>";
             if (typeof noticias[i].getElementsByTagName("media:content")[0] != "undefined") {
                 tabla += filtrar(noticias[i].getElementsByTagName("media:content")[0].getAttribute("type"), noticias[i].getElementsByTagName("media:content")[0].getAttribute("url"))
             } else {
@@ -39,7 +39,7 @@ function filtrar(typeImage, itemMedia){
     if (typeImage.substr(0, 5) === "image") {
         media += "<td><img width='300' height='220' src='" + itemMedia + "'></td><td>";
     } else if (typeImage.substr(0, 5) === "video"){
-        media += '<td><video width="300" height="220" controls ><source src="'
+        media += '<td><video width="300" height="-220" controls ><source src="'
             + itemMedia + '" type="' + typeImage + '">Video</video></td><td>';
     }
     return media;
