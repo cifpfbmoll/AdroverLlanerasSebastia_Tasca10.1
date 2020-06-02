@@ -16,14 +16,17 @@ function cargarXML(xml){
     var tabla = "";
     var noticias = docXML.getElementsByTagName("item");
     for (var i = 0; i < noticias.length; i++){
-        tabla += "<tr><td style='width: 30%;'><h5>";
+        tabla += "<tr><td>";
         tabla += noticias[i].getElementsByTagName("title")[0].textContent;
-        tabla += "</h5></td>";
+        tabla += "</td><td>";
             if (typeof noticias[i].getElementsByTagName("media:content")[0] != "undefined") {
-                tabla += filtrar(noticias[i].getElementsByTagName("media:content")[0].getAttribute("type"), noticias[i].getElementsByTagName("media:content")[0].getAttribute("url"))
+                tabla += filtrar(noticias[i].getElementsByTagName("media:content")[0].getAttribute("type"), noticias[i].getElementsByTagName("media:content")[0].getAttribute("url"));
             } else {
-                tabla += "<td><img width='300' height='220' src='img/coollogo_com-23003894.png' alt='logo'></td><td>";
+                tabla += "<img width='280' height='200' src='img/coollogo_com-23003894.png' alt='logo'>";
             }
+        tabla += "</td><td>";  
+        tabla += noticias[i].getElementsByTagName("description")[0].textContent;
+        tabla += "</td><td>";
         tabla += noticias[i].getElementsByTagName("pubDate")[0].textContent;
         tabla += "</td><td><a class='btn btn-primary' href='";
         tabla += noticias[i].getElementsByTagName("link")[0].textContent;
@@ -37,10 +40,10 @@ function filtrar(typeImage, itemMedia){
 
     console.log(typeImage.substr(0, 5))
     if (typeImage.substr(0, 5) === "image") {
-        media += "<td><img width='300' height='220' src='" + itemMedia + "'></td><td>";
+        media += "<img width='280' height='200' src='" + itemMedia + "'>";
     } else if (typeImage.substr(0, 5) === "video"){
-        media += '<td><video width="300" height="-220" controls ><source src="'
-            + itemMedia + '" type="' + typeImage + '">Video</video></td><td>';
+        media += '<video width="280" height="-200" controls ><source src="'
+            + itemMedia + '" type="' + typeImage + '">Video</video>';
     }
     return media;
 }
