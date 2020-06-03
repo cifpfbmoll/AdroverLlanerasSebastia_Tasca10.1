@@ -1,4 +1,11 @@
-document.getElementById("boton").addEventListener("click", notices)
+document.getElementById("carga").addEventListener("click", notices)
+document.getElementById("clean").addEventListener("click", limpia)
+
+function limpia(){
+    document.getElementById("tb").innerHTML = "";
+    document.getElementById("info").innerHTML = "";
+    document.getElementById("clean").innerHTML = "";
+}
 
 function notices(){
     var xhr = new XMLHttpRequest();
@@ -12,8 +19,14 @@ function notices(){
 }
 
 function cargarXML(xml){
+
+    
     var docXML = xml.responseXML;
     var tabla = "";
+    var info = "<br><br>";
+    info += "<div><span>Canal RSS usado: Feed MRSS-S</span></div>";
+    info += "<div><span>URL de la página original: <a href='https://elpais.com'><button type='button' class='btn btn-link'>Link</button></a> </span> </div>"
+    info += "<div><span>Descripción del canal usado: Archivo generado por sitio web que contiene info de lo publicado.</span></div>"
     var noticias = docXML.getElementsByTagName("item");
     for (var i = 0; i < noticias.length; i++){
         tabla += "<tr><td>";
@@ -30,9 +43,11 @@ function cargarXML(xml){
         tabla += noticias[i].getElementsByTagName("pubDate")[0].textContent;
         tabla += "</td><td><a class='btn btn-primary' href='";
         tabla += noticias[i].getElementsByTagName("link")[0].textContent;
-        tabla += "'>Link</a></td></tr>";
+        tabla += "'>Web</a></td></tr>";
     }
     document.getElementById("tb").innerHTML = tabla;
+    document.getElementById("info").innerHTML = info;
+    document.getElementById("clean").innerHTML = "<button type='button' class='btn btn-primary btn-lg btn-block' id='limpia'>Clean</button>"
 
 }
 function filtrar(typeImage, itemMedia){
