@@ -1,3 +1,8 @@
+/**
+ * Sebastià Adrover
+ */
+
+
 /*Eventos causados al clickar los botones */
 document.getElementById("carga").addEventListener("click", notices)
 document.getElementById("clean").addEventListener("click", limpia)
